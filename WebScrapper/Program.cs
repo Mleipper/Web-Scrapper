@@ -4,9 +4,12 @@ namespace WebScrapper
 {
     class Program
     {
-        static void Main(string[] args)
+        static async System.Threading.Tasks.Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var scrapper = new WebScrapper();
+
+            var response = await scrapper.GetRespone();
+            scrapper.GetScrapeResults(response);
         }
     }
 }
