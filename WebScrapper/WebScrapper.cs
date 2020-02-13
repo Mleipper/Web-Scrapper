@@ -13,13 +13,15 @@ namespace WebScrapper
 {
     class WebScrapper
     {
-        private readonly string uri = "https://starsports.bet/sport/horseracing";
+        private readonly string BaseUri = "https://starsports.bet/sport/horseracing";
+
+        private readonly string test = "https://www.starsports.bet/api/events/search?market.main=yes&perPage=500&sort=-competition.displayOrder&sort=competition.name&sort=timeSettings.startTime&sport=horseracing&startTime%5Bfrom%5D=2020-02-13T00%3A00%3A00.000Z&startTime%5Bto%5D=2020-02-15T00%3A00%3A00.000Z&tags.star-events=-";
 
         public async Task<IHtmlDocument> GetRespone()
         {
             var httpClient = new HttpClient();
 
-            var request = await httpClient.GetAsync(uri);
+            var request = await httpClient.GetAsync(BaseUri);
 
             Stream response = await request.Content.ReadAsStreamAsync();
 
@@ -27,6 +29,13 @@ namespace WebScrapper
 
             return parser.ParseDocument(response);
 
+        }
+
+        public string GetDateFromAndTo()
+        {
+            var currentDateTime = DateTime.UtcNow;
+
+            return $"from%5D=2020-02-13T00%3A00%3A00.000Z&startTime%5Bto%5D=2020-02-15T00%3A00%3A00.000Z";
         }
 
         public void GetScrapeResults(IHtmlDocument document)
