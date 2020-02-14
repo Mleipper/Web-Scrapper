@@ -102,8 +102,8 @@ namespace WebScrapper.StarSportsAPIFiles
         public bool display { get; set; }
         public int displayOrder { get; set; }
         public bool tradedInPlay { get; set; }
-        public bool forecastsOffered { get; set; }
-        public bool tricastsOffered { get; set; }
+        public bool? forecastsOffered { get; set; }
+        public bool? tricastsOffered { get; set; }
         public int inPlayDelay { get; set; }
         public bool sp { get; set; }
         public object line { get; set; }
