@@ -6,9 +6,9 @@ namespace WebScrapper
     {
         static async System.Threading.Tasks.Task Main(string[] args)
         {
-            var scrapper = new WebScrapper();
+            var scrapper = new StarSportJsonGetter();
             scrapper.GetDateFromAndTo();
-            var response = await scrapper.GetRespone();
+            var response = await scrapper.GetResponeAsync();
             scrapper.GetScrapeResults(response);
         }
     }
