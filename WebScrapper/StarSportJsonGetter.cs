@@ -20,7 +20,7 @@ namespace WebScrapper
             client = new HttpClient();
         }
 
-        public async Task<string> GetResponeAsync()
+        public async Task<FeedData> GetResponeAsync()
         {
             var result = await client.GetAsync(GetEndPoint());
 
@@ -28,22 +28,9 @@ namespace WebScrapper
             {
                 throw new Exception($"Request for data failed with code {result.StatusCode}...");
             }
-            string falkjf = await result.Content.ReadAsStringAsync();
-            var testrr = JsonConvert.DeserializeObject<FeedData>(falkjf);
-            //string hhed = await result.Content.ReadAsStringAsync();
+            string feedData = await result.Content.ReadAsStringAsync();
 
-            using (Stream stream = await result.Content.ReadAsStreamAsync())
-
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                var content = await reader.ReadToEndAsync();
-                var test = JsonConvert.DeserializeObject<FeedData>(content);
-            }
-
-            //Stream response = await request.Content.ReadAsStreamAsync();
-
-            return "hhed";
-
+            return JsonConvert.DeserializeObject<FeedData>(feedData);
         }
 
         public string GetEndPoint()
